@@ -10,22 +10,25 @@ namespace ClearIconCache
     public class Plugin : BaseUnityPlugin
     {
         // create config ent
-        public static ConfigEntry<bool> ConfClearIconCache;
+        public static ConfigEntry<bool> ConfClearItemIconCache;
+        public static ConfigEntry<bool> ConfClearClothingIconCache;
+        public static ConfigEntry<bool> ConfClearPlayerIconCache;
 
         private void Awake()
         {
             // set up config
-            ConfClearIconCache = Config.Bind("Core", "Clears Icon Cache on game start-up", false, "Clears icon cache");
+            ConfClearItemIconCache = Config.Bind("Core", "Clears Item Icon Cache on game start-up", false, "Clears item icon cache");
+            ConfClearClothingIconCache = Config.Bind("Core", "Clears Clothing Icon Cache on game start-up", false, "Clears clothing icon cache");
+            ConfClearPlayerIconCache = Config.Bind("Core", "Clears Player Icon Cache on game start-up", false, "Clears player icon cache");
 
             // Plugin startup logic
             Logger.LogInfo($"Plugin com.JustNU.ClearIconCache is loading");
 
             // clean icon cache
-            if (Plugin.ConfClearIconCache.Value == true)
+            if (Plugin.ConfClearItemIconCache.Value == true)
             {
                 System.IO.DirectoryInfo IconCachePath = new DirectoryInfo(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live"));
-                System.IO.DirectoryInfo ClothingCachePath = new DirectoryInfo(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live\\Clothing"));
-
+                
                 if (Directory.Exists(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live"))) 
                 {
                     foreach (FileInfo file in IconCachePath.GetFiles())
@@ -33,10 +36,28 @@ namespace ClearIconCache
                         file.Delete();
                     }
                 }
+            }
+
+            if (Plugin.ConfClearClothingIconCache.Value == true)
+            {
+                System.IO.DirectoryInfo ClothingCachePath = new DirectoryInfo(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live\\Clothing"));
 
                 if (Directory.Exists(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live\\Clothing")))
                 {
                     foreach (FileInfo file in ClothingCachePath.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                }
+            }
+
+            if (Plugin.ConfClearClothingIconCache.Value == true)
+            {
+                System.IO.DirectoryInfo PlayerIconCachePath = new DirectoryInfo(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live\\PlayerIcons"));
+
+                if (Directory.Exists(Path.Combine(Application.temporaryCachePath, "Icon Cache\\live\\PlayerIcons")))
+                {
+                    foreach (FileInfo file in PlayerIconCachePath.GetFiles())
                     {
                         file.Delete();
                     }
