@@ -17,9 +17,9 @@ namespace ClearIconCache
         private void Awake()
         {
             // set up config
-            ConfClearItemIconCache = Config.Bind("Core", "Clears Item Icon Cache on game start-up", false, "Clears item icon cache");
-            ConfClearClothingIconCache = Config.Bind("Core", "Clears Clothing Icon Cache on game start-up", false, "Clears clothing icon cache");
-            ConfClearPlayerIconCache = Config.Bind("Core", "Clears Player Icon Cache on game start-up", false, "Clears player icon cache");
+            ConfClearItemIconCache = Config.Bind("Core", "Clear item icon cache", false, "Clear Item Icon Cache on game start-up");
+            ConfClearClothingIconCache = Config.Bind("Core", "Clear clothing icon cache", false, "Clear Clothing Icon Cache on game start-up");
+            ConfClearPlayerIconCache = Config.Bind("Core", "Clear player icon cache", false, "Clear Player Icon Cache on game start-up");
 
             // Plugin startup logic
             Logger.LogInfo($"Plugin com.JustNU.ClearIconCache is loading");
